@@ -1,6 +1,0 @@
-format: jb-article
-root: firefliespage
-sections:
-- file: firefliespage
-- file: codingfireflies
-- file: fireflypart2

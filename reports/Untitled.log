@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+  File "C:\Users\zoya\turingenv\lib\site-packages\jupyter_cache\executors\utils.py", line 51, in single_nb_execution
+    executenb(
+  File "C:\Users\zoya\turingenv\lib\site-packages\nbclient\client.py", line 1085, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "C:\Users\zoya\turingenv\lib\site-packages\nbclient\util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "C:\Users\zoya\turingenv\lib\site-packages\nbclient\util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "C:\Users\zoya\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 641, in run_until_complete
+    return future.result()
+  File "C:\Users\zoya\turingenv\lib\site-packages\nbclient\client.py", line 551, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\zoya\turingenv\lib\site-packages\nbclient\client.py", line 846, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "C:\Users\zoya\turingenv\lib\site-packages\nbclient\client.py", line 748, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# the clock ticker
+clock = 0
+
+def on_received_number(receivedNumber):
+    global clock
+    # advance clock to catch up neighbors
+    clock += 1
+radio.on_received_number(on_received_number)
+
+def on_forever():
+    global clock
+    # if clock hits noon, flash the screen
+    if clock >= 8:
+        # notify neighbors
+        radio.send_number(0)
+        # flash
+        game.add_score(1)
+        # wait for 2 ticks
+        basic.pause(200)
+        # reset the clock
+        clock = 0
+    else:
+        # just wait a bit
+        basic.pause(100)
+        # increment the clock
+        clock += 1
+basic.forever(on_forever)
+
+radio.set_transmit_power(1)
+radio.set_group(12)
+------------------
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Input [1;32mIn [1][0m, in [0;36m<module>[1;34m[0m
+[0;32m      6[0m     [38;5;66;03m# advance clock to catch up neighbors[39;00m
+[0;32m      7[0m     clock [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[1;32m----> 8[0m [43mradio[49m[38;5;241m.[39mon_received_number(on_received_number)
+[0;32m     10[0m [38;5;28;01mdef[39;00m [38;5;21mon_forever[39m():
+[0;32m     11[0m     [38;5;28;01mglobal[39;00m clock
+
+[1;31mNameError[0m: name 'radio' is not defined
+NameError: name 'radio' is not defined
+

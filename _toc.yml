@@ -1,6 +1,0 @@
-format: jb-article
-root: Introduction
-sections:
-- file: firefliespage
-- file: fireflypart2
-- file: conclusion
